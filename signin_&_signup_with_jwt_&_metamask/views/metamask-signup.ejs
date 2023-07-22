@@ -1,0 +1,89 @@
+<!-- metamask-signup.ejs -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaMask Sign Up</title>
+</head>
+<body>
+    <h1>MetaMask Sign Up</h1>
+    <p>Click the button below to sign up with MetaMask:</p>
+    <form action="/metamask-signup" method="post">
+        <button type="submit">Sign Up with MetaMask</button>
+    </form>
+    <!-- Add your JavaScript code to interact with MetaMask here -->
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaMask Sign Up</title>
+</head>
+<body>
+    <h1>MetaMask Sign Up</h1>
+    <p>Click the button below to sign up with MetaMask:</p>
+    <form id="signupForm" action="/metamask-signup" method="post">
+        <button type="submit" id="metamaskSignUpButton">Sign Up with MetaMask</button>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.0/dist/web3.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            // Check if MetaMask is installed
+            if (typeof window.ethereum === "undefined") {
+                console.log("MetaMask not found. Please install MetaMask.");
+                return;
+            }
+
+            // Prompt the user to connect to MetaMask
+            try {
+                // Request access to user accounts from MetaMask
+                await ethereum.request({ method: "eth_requestAccounts" });
+
+                // Now, Web3.js is enabled and can be used to interact with MetaMask
+                const web3 = new Web3(window.ethereum);
+
+                // Add an event listener to the form to handle the sign-up process
+                const signupForm = document.getElementById("signupForm");
+                const metamaskSignUpButton = document.getElementById("metamaskSignUpButton");
+                
+                metamaskSignUpButton.addEventListener("click", async (event) => {
+                    event.preventDefault();
+
+                    // Get the user's Ethereum address from MetaMask
+                    const accounts = await web3.eth.getAccounts();
+                    const ethereumAddress = accounts[0];
+
+                    // Generate a random message to sign (replace this with a secure message)
+                    const messageToSign = "This is a test message.";
+
+                    // Sign the message using MetaMask
+                    const signature = await web3.eth.personal.sign(messageToSign, ethereumAddress);
+
+                    // Set the signed message and Ethereum address in the form as hidden input fields
+                    const signedMessageInput = document.createElement("input");
+                    signedMessageInput.type = "hidden";
+                    signedMessageInput.name = "signedMessage";
+                    signedMessageInput.value = signature;
+                    signupForm.appendChild(signedMessageInput);
+
+                    const ethereumAddressInput = document.createElement("input");
+                    ethereumAddressInput.type = "hidden";
+                    ethereumAddressInput.name = "ethereumAddress";
+                    ethereumAddressInput.value = ethereumAddress;
+                    signupForm.appendChild(ethereumAddressInput);
+
+                    // Submit the form to the /metamask-signup endpoint
+                    signupForm.submit();
+                });
+            } catch (error) {
+                console.log("User denied access to MetaMask or MetaMask not connected.");
+            }
+        });
+    </script>
+</body>
+</html>
