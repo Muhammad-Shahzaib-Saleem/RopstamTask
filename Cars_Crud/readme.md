@@ -34,39 +34,58 @@ mongoose.connect('your_mongodb_connection_url', {
 ## API Endpoints
 
 1. Get Car Database Status
+
 Endpoint: /carsdb
-HTTP Method: GET
+
+- HTTP Method: GET
+
 Description: Checks the status of the car database.
 Response Codes:
 201 (OK) - Returns a success message if the database is working fine.
 401 (Unauthorized) - Returns an error message if there's an issue with the database connection.
+
 2. Create a New Car Entry
-Endpoint: /cars
+
+- Endpoint: /cars
+
 HTTP Method: POST
+
 Description: Creates a new entry for a car in the database.
 Request Body: Expects a JSON object containing car details (e.g., make, model, registration_no).
 Response Codes:
 201 (Created) - Returns the newly created car object if successful.
 401 (Unauthorized) - Returns an error message if there's an issue with the database connection.
+
 3. Read All Cars
-Endpoint: /cars
+
+- Endpoint: /cars
+
 HTTP Method: GET
 Description: Retrieves all car entries from the database.
 Response Codes:
 201 (OK) - Returns an array of car objects if successful.
 401 (Unauthorized) - Returns an error message if there's an issue with the database connection.
+
 4. Update Car Entry
-Endpoint: /cars/:registration_no
+
+- Endpoint: /cars/:registration_no
+
 HTTP Method: PATCH
+
 Description: Updates the details of a specific car entry based on the registration number.
+
 URL Parameters: Replace :registration_no in the endpoint with the actual registration number of the car you want to update.
 Request Body: Expects a JSON object containing the updated car details (e.g., make, model, registration_no).
 Response Codes:
 201 (OK) - Returns the updated car object if successful.
 401 (Unauthorized) - Returns an error message if there's an issue with the database connection.
+
 5. Delete Car Entry
-Endpoint: /cars/:id
+
+- Endpoint: /cars/:id
+
 HTTP Method: DELETE
+
 Description: Deletes a specific car entry from the database based on its ID.
 URL Parameters: Replace :id in the endpoint with the actual ID of the car you want to delete.
 Response Codes:
@@ -77,6 +96,6 @@ Response Codes:
 ## Getting Started
 To run the API, follow the installation steps mentioned above. Once all the dependencies are installed and the MongoDB connection is properly configured, you can start the server using the following command:
 
--- npm start
+- npm start
 
 By default, the server will run on http://localhost:3001. You can use tools like Postman or cURL to make requests to the API endpoints.
