@@ -38,15 +38,15 @@ This project implements a user sign-up and login system with MetaMask integratio
 
 git clone https://github.com/Muhammad-Shahzaib-Saleem/SignUpAndLoginSystem.git
 
-cd SignUpAndLoginSystem
-npm install
+- cd SignUpAndLoginSystem
+- npm install
 
 
 3. Set up your MongoDB database and adjust the `mongodb` connection URL in `index.js`.
 
 4. Start the server:
 
-npm start
+- npm start
 
 
 5. Open your browser and visit `http://localhost:3100` to access the application.
