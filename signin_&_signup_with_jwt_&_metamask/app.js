@@ -81,7 +81,7 @@ app.post('/signup' , async (req , res) =>{
     {
       console.log("successfully register ");
 
-       // Send a welcome email to the user
+      // Send a welcome email to the user
        const to = req.body.email;
        const subject = "Welcome to our website";
        const text = "Thank you for signing up. Welcome to our website!";
@@ -141,6 +141,7 @@ app.get('/metamask-signup', (req, res) => {
 app.post('/metamask-signup', async (req, res) => {
   try {
     // Get the signed message and user's Ethereum address from the request body
+    console.log(req.body);
     const { signedMessage, ethereumAddress } = req.body;
 
     // Verify the signed message using Web3.js or other libraries
@@ -155,11 +156,11 @@ app.post('/metamask-signup', async (req, res) => {
         res.status(400).send('Sucessfull Login.');
       } else {
         // Create a new user record in the database with the Ethereum address
-        const newUser = new SIGNUP_METAMASK({ ethereumAddress });
+        const newUser = new SIGNUP_METAMASK({ ethereumAddress:req.body.ethereumAddress });
         await newUser.save();
 
         // Redirect the user to the main page or any other page after successful sign-up
-        res.redirect('/main');
+        res.render('main');
       }
     } else {
       console.log('Invalid signature.');
